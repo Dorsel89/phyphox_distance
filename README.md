@@ -4,7 +4,7 @@
 3. [Specifications](#Specification)
 4. [Test-Results](#Test-results)
 
-## phyphox Experiments <a name="qr"></a>
+## phyphox experiments <a name="qr"></a>
 Plot distance over time: <br>
 ![simple distance](experiments/qr-codes/simpleDistance.png?raw=true "simple distance")
 
@@ -30,4 +30,4 @@ Power supply
  - Buck-Boost: TPS63031 ([Datasheet](https://www.ti.com/lit/gpn/tps63031))
  - 800mAh Li-Ion
 
-## Test-Results <a name="Test-results"></a>
+## Test-results <a name="Test-results"></a>
