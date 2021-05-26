@@ -1,0 +1,37 @@
+<phyphox xmlns="http://phyphox.org/xml" xmlns:editor="http://phyphox.org/editor/xml" version="1.7" editor:version="1.0" locale="en">
+    <title>phyphox distance</title>
+    <category>phyphox hardware</category>
+    <description></description>
+    <data-containers>
+        <container size="1000" static="false">Output 1</container>
+        <container size="1000" static="false">Output 2</container>
+    </data-containers>
+    <input>
+        <bluetooth editor:uuid="97" editor:posx="447.6107511520386" editor:posy="303.1818046569824"  name="distanz"  mode="notification" rate="1" subscribeOnStart="false">
+            <config char="cddf1003-30f7-4671-8b43-5e40ba53514a" conversion="hexadecimal">010104</config>
+            <output char="cddf1002-30f7-4671-8b43-5e40ba53514a" conversion="float32LittleEndian">Output 1</output>
+            <output char="cddf1002-30f7-4671-8b43-5e40ba53514a" conversion="string" extra="time">Output 2</output>
+        </bluetooth>
+    </input>
+    <output>
+    </output>
+    <analysis sleep="0"  onUserInput="false">
+    </analysis>
+    <views>
+        <view label="Rawdata">
+            <graph editor:uuid="104" editor:posx="1110.2492229645784" editor:posy="641.9319634605121" label="distance" aspectRatio="2.5" style="lines" lineWidth="1" color="ff7e22" partialUpdate="false" history="1" labelX="time" labelY="distance" labelZ="" unitX="s" unitY="mm" unitZ="" logX="false" logY="false" logZ="false" xPrecision="2" yPrecision="0" zPrecision="3" scaleMinX="auto" scaleMaxX="auto" scaleMinY="auto" scaleMaxY="auto" scaleMinZ="auto" scaleMaxZ="auto" minX="0" maxX="0" minY="0" maxY="0" minZ="0" maxZ="0"  mapWidth="0"       >
+                <input axis="x">Output 2</input>
+                <input axis="y">Output 1</input>
+            </graph>
+            <value editor:uuid="111" editor:posx="1106.76494808364" editor:posy="412.11497269947034" label="distance" size="1" precision="0" scientific="false" unit="mm" factor="1" >
+                <input>Output 1</input>
+            </value>
+        </view>
+    </views>
+    <export>
+        <set name="Rawdata">
+            <data name="distance in mm">Output 1</data>
+            <data name="time in s">Output 2</data>
+        </set>
+    </export>
+</phyphox>
