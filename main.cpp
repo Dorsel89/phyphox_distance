@@ -33,8 +33,9 @@ int ledCounter=0;
 uint8_t configData[20]={0};
 
 bool ENABLE = false;
+uint32_t volatile InterMeasurement = 100;
 VL53L1X::DistanceModes activeDistanceMode = VL53L1X::DistanceModes::Long;
-VL53L1X::TimingBudget activeTimingBudget = VL53L1X::TimingBudget::_100ms;
+VL53L1X::TimingBudget activeTimingBudget = VL53L1X::TimingBudget::_33ms;
 
 I2C i2c(SDA,SCL);
 
@@ -68,13 +69,22 @@ VL53L1X::TimingBudget MapByteToTimingBudget[7]={
     VL53L1X::TimingBudget::_200ms,
     VL53L1X::TimingBudget::_500ms
 };
-
+uint16_t MapByteToTimingInMS[7]={
+    15,
+    20,
+    33,
+    50,
+    100,
+    200,
+    500
+};
 
 void newConfiguration(){
 
     if(ENABLE){       
         sensor.SetDistanceMode(activeDistanceMode);
         sensor.SetTimingBudgetInMs(activeTimingBudget);
+        sensor.SetInterMeasurementInMs(InterMeasurement+5);
         sensor.StartRanging();
     }else {
         //sensor.SetToSleep();
@@ -85,6 +95,7 @@ void receivedData() {           // get data from phyphox app
     ENABLE = configData[0]; 
     activeDistanceMode = MapByteToDistanceMode[configData[1]];
     activeTimingBudget = MapByteToTimingBudget[configData[2]];
+    InterMeasurement = MapByteToTimingInMS[configData[2]];
     newConfiguration();
   }
 void receivedSN() {           // get data from phyphox app
@@ -156,12 +167,10 @@ int main() {
                     float timestampF = 0.001*duration_cast<std::chrono::milliseconds>(t.elapsed_time()).count();
                     PhyphoxBLE::write(distanceF,timestampF); 
                     sensor.ClearInterrupt();
-                    ThisThread::sleep_for(10ms);
+                    ThisThread::sleep_for((InterMeasurement-3)*1ms);
                 }else {
-                    ThisThread::sleep_for(10ms);
-                }
-                
-                ThisThread::sleep_for(100ms);          
+                    ThisThread::sleep_for(1ms);
+                }          
         }else {
             ThisThread::sleep_for(100ms);
         }
