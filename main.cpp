@@ -119,7 +119,7 @@ void receivedSN() {           // get data from phyphox app
         s = std::string(4 - s.size(), '0') + s;
     }
     std::string S;
-    S.append("Distance D");
+    S.append("Distanz D");
     S.append(s);
     strcpy(myDeviceName, S.c_str());  
  }
