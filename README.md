@@ -8,13 +8,35 @@
 Plot distance over time: <br>
 ![simple distance](experiments/qr-codes/simpleDistance.png?raw=true "simple distance")
 
-## Config <a name="config"></a>
+## Configuration <a name="config"></a>
+
+charateristic | uuid
+--------------|-----
+data          | cddf1002-30f7-4671-8b43-5e40ba53514a
+byte 0-3          | distance, type: float in mm
+byte 4-7          | timestamp, type: float in s
+config        | cddf1003-30f7-4671-8b43-5e40ba53514a
+
 Byte | Function
 -----|----------
 0 | enable/disable distance sensor
 1 | distance mode
 2 | timing budget
-3 | region of interest
+
+distance mode | value (hex)
+--------------|------
+short | 00
+long | 01
+
+timing budget | value (hex)
+--------------|------
+15ms | 00
+20ms | 01
+33ms | 02
+50ms | 03
+100ms | 04
+200ms | 05
+500ms | 06
 
 ## Specifications <a name="Specification"></a>
 
